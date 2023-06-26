@@ -11,6 +11,7 @@ import {NgForm} from '@angular/forms';
 })
 export class AppComponent implements OnInit {
   public employees: Array<Employee> = []
+  public emp!: Employee;
   public editEmployee?: Employee;
   public deleteEmployee?: Employee;
 
@@ -38,6 +39,7 @@ export class AppComponent implements OnInit {
     button.style.display="none";
     button.setAttribute("data-toggle", "modal");
     if(mode === "add"){
+      this.emp = employee
       button.setAttribute("data-target", "#addEmployeeModal");
     }
     if(mode === "edit"){
@@ -90,5 +92,21 @@ export class AppComponent implements OnInit {
         alert(error.message);
       }
     })
+  }
+
+  public searchEmployees(key: string): void {
+    const results: Array<Employee> = [];
+    for (const employee of this.employees) {
+       if(employee.name.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+          employee.email.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+          employee.phoneNumber.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+          employee.jobTitle.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+        results.push(employee);
+      }
+    }
+    this.employees = results;
+    if(results.length === 0 || !key) {
+      this.getEmployees()
+    }
   }
 }

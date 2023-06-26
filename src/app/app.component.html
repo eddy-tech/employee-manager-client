@@ -1,3 +1,22 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" >
+  <a class="navbar-brand" style="color: black;">Employee Manager</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" (click)="onOpenModal(emp, 'add')">Add Employe <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input type="search" (ngModelChange)="searchEmployees(key.value)" #key="ngModel" ngModel
+       id="searchName" class="form-control mr-sm-2" name="key" placeholder="Search employees ...">
+    </form>
+  </div>
+</nav>
+
 <div class="container" id="main-container">
     <div class="row">
         <div *ngFor="let employee of employees" class="col-md-6 col-xl-3">
